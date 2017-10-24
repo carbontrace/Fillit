@@ -3,38 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cterrill <cterrill@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: ckanoa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/08 20:50:27 by cterrill          #+#    #+#             */
-/*   Updated: 2017/05/08 21:00:45 by cterrill         ###   ########.fr       */
+/*   Created: 2017/01/16 11:42:45 by ckanoa            #+#    #+#             */
+/*   Updated: 2017/06/12 15:08:11 by ckanoa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	int i;
-	int j;
-	int src_size;
-	int dst_size;
-	int space_left;
+	size_t i;
+	size_t j;
+	size_t len;
 
 	i = 0;
-	dst_size = 0;
-	space_left = size;
-	while (src[i] != '\0')
+	j = 0;
+	len = (ft_strlen(dest) + ft_strlen((char*)src));
+	while (dest[i] != 0 && i < size)
 		i++;
-	src_size = i;
-	while (dst[dst_size] != '\0' && space_left-- != 0)
-		dst_size++;
-	space_left = size - dst_size;
-	if (space_left == 0)
-		return ((size_t)(size + src_size));
-	i = 0;
-	j = dst_size;
-	while (src[i] != 0 && space_left-- > 1)
-		dst[j++] = src[i++];
-	dst[j] = '\0';
-	return ((size_t)(src_size + dst_size));
+	if ((size - i) == 0)
+		return (i + ft_strlen((char*)src));
+	while (i != (size - 1) && src[j] != 0)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (len);
 }

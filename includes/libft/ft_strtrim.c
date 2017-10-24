@@ -3,40 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cterrill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ckanoa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/21 12:05:48 by cterrill          #+#    #+#             */
-/*   Updated: 2017/05/14 19:51:19 by cterrill         ###   ########.fr       */
+/*   Created: 2017/01/16 11:42:45 by ckanoa            #+#    #+#             */
+/*   Updated: 2017/06/21 14:57:54 by ckanoa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(const char *s)
+static int	find_start(char const *s)
 {
 	int		i;
-	int		j;
-	char	*new;
 
-	if (!s)
-		return (NULL);
 	i = 0;
-	while (*s == ' ' || *s == '\n' || *s == '\t')
-		s++;
-	i = ft_strlen(s) - 1;
-	if (i == -1)
-		return (ft_strnew(0));
-	while (!s[i] || s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-		i--;
-	new = ft_strnew(++i);
-	if (!new)
-		return (NULL);
-	j = i;
-	i = 0;
-	while (i < j)
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+		i++;
+	return (i);
+}
+
+static int	find_end(char const *s, int start)
+{
+	int		i;
+	int		end;
+
+	i = start;
+	end = 0;
+	while (s[i])
 	{
-		new[i] = s[i];
+		if (s[i] != ' ' && s[i] != '\n' && s[i] != '\t' && s[i] != '\0')
+			end = i;
 		i++;
 	}
-	return (new);
+	return (end);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	int		i;
+	int		start;
+	int		end;
+	int		j;
+	char	*ret;
+
+	start = find_start(s);
+	end = find_end(s, start) + 1;
+	if (start > end)
+		return ("");
+	ret = (char*)malloc((1 + (end - start)) * sizeof(char));
+	if (ret == NULL)
+		return (NULL);
+	i = start;
+	j = 0;
+	while (i < end)
+	{
+		ret[j] = s[i];
+		i++;
+		j++;
+	}
+	ret[j] = '\0';
+	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cterrill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ckanoa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/22 22:16:04 by cterrill          #+#    #+#             */
-/*   Updated: 2017/04/22 22:18:30 by cterrill         ###   ########.fr       */
+/*   Created: 2017/01/16 11:42:45 by ckanoa            #+#    #+#             */
+/*   Updated: 2017/06/12 17:20:50 by ckanoa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 char	*ft_strrev(char *str)
 {
-	char *p1;
-	char *p2;
+	char	buff;
+	size_t	len;
+	size_t	i;
 
-	if (!str || !*str)
-		return (str);
-	p1 = str;
-	p2 = str + ft_strlen(str);
-	while (p2 > p1)
-		ft_swapchar(p1++, p2--);
+	len = 0;
+	i = 0;
+	while (str[len + 1] != '\0')
+		len++;
+	while (len > i)
+	{
+		buff = str[i];
+		str[i] = str[len];
+		str[len] = buff;
+		i++;
+		len--;
+	}
 	return (str);
 }

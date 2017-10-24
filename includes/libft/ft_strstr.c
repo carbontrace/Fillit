@@ -3,16 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cterrill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ckanoa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/17 22:00:49 by cterrill          #+#    #+#             */
-/*   Updated: 2017/05/06 06:51:54 by cterrill         ###   ########.fr       */
+/*   Created: 2017/01/16 23:02:30 by ckanoa            #+#    #+#             */
+/*   Updated: 2017/06/15 19:19:40 by ckanoa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char			*ft_strstr(const char *big, const char *little)
+char	*ft_strstr(char *str, char *to_find)
 {
-	return (ft_strnstr(big, little, ft_strlen(big)));
+	char *needle;
+	char *haystack;
+
+	if (*to_find == '\0')
+		return (str);
+	while (*str != '\0')
+	{
+		haystack = str;
+		needle = to_find;
+		while (*str != '\0' && *needle != '\0' && *str == *needle)
+		{
+			str++;
+			needle++;
+		}
+		if (*needle == '\0')
+			return (haystack);
+		str = haystack + 1;
+	}
+	return (0);
 }

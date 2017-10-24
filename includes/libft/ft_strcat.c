@@ -3,22 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cterrill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ckanoa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 16:09:52 by cterrill          #+#    #+#             */
-/*   Updated: 2017/04/23 14:43:36 by cterrill         ###   ########.fr       */
+/*   Created: 2017/01/25 23:11:24 by ckanoa            #+#    #+#             */
+/*   Updated: 2017/06/12 15:06:57 by ckanoa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcat(char *restrict s1, const char *restrict s2)
+char	*ft_strcat(char *dest, const char *src)
 {
-	char *iter;
+	char *ret;
 
-	iter = s1;
-	while (*iter != 0)
-		iter++;
-	while (*s2 != 0)
-		*iter++ = *s2++;
-	*iter = *s2;
-	return (s1);
+	ret = dest;
+	while (*ret != '\0')
+		ret++;
+	while (*src != '\0')
+	{
+		*ret = *src;
+		ret++;
+		src++;
+	}
+	*ret = '\0';
+	return (dest);
 }
